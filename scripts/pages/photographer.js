@@ -1,19 +1,37 @@
 //Mettre le code JavaScript lié à la page photographer.html
 async function getPhotographers() {
+  const urlSearchId = window.location.search.split("=")[1];
   fetch("../../data/photographers.json")
     .then((response) => response.json())
-    .then((data) => displayPhotographers(data.photographers[1]))
-    .then(() => {
-      const picture = "assets/photographers/MimiKeel.jpg";
+    .then((data) => {
+      const photographer = data.photographers.find((x) => x.id == urlSearchId);
+      displayPhotographers(photographer);
       const avatar = document.querySelector(".photograph-img");
-      avatar.setAttribute("src", picture);
+      avatar.setAttribute(
+        "src",
+        `assets/photographers/${photographer.portrait}`
+      );
     });
 }
 
+async function getPhotographerName(id) {
+  let reponse;
+  await fetch("../../data/photographers.json")
+    .then((response) => response.json())
+    .then((data) => {
+      const photographer = data.photographers.find((x) => x.id == id);
+      reponse = photographer?.name;
+    });
+  return reponse;
+}
+
 async function getMedias() {
+  const urlSearchId = window.location.search.split("=")[1];
   fetch("../../data/photographers.json")
     .then((response) => response.json())
-    .then((data) => console.log(data.media));
+    .then((data) =>
+      displayMedias(data.media.filter((x) => x.photographerId == urlSearchId))
+    );
 }
 
 async function displayPhotographers(photographer) {

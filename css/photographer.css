@@ -40,7 +40,7 @@
 .modal {
   border-radius: 5px;
   background-color: #db8876;
-  width: 50%;
+  width: 43%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -101,6 +101,7 @@ form input {
 .photograph-filters {
   display: flex;
   align-items: center;
+  margin-top: 20px;
 }
 
 .photograph-filters select {
@@ -108,4 +109,40 @@ form input {
   background-color: #901c1c;
   font-size: 18px;
   color: white;
+}
+
+.photograph-media {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 58px;
+}
+
+.photograph-media h4 {
+  font-size: 24px;
+  color: #901c1c;
+  margin-top: 10px !important;
+  margin-bottom: 0;
+}
+
+.photograph-media img {
+  width: 350px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.media-container {
+  margin-bottom: 30px;
+  margin-right: 95px;
+}
+
+.media-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.media-info p {
+  font-size: 16px;
 }
