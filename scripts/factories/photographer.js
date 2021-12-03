@@ -67,6 +67,7 @@ function photographerMedia(data) {
     const photographMedias = document.querySelector(".photograph-media");
     const media = document.createElement("div");
     const mediaInfo = document.createElement("div");
+
     mediaInfo.className = "media-info";
     media.className = "media-container";
 
