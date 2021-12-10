@@ -11,6 +11,16 @@ async function getPhotographers() {
         "src",
         `assets/photographers/${photographer.portrait}`
       );
+      const main = document.querySelector(".main-container");
+      const prices = document.createElement("div");
+      const price = document.createElement("p");
+      price.innerText = photographer.price + "/jour";
+      prices.className = "prices-container";
+      prices.appendChild(price);
+      main.appendChild(prices);
+
+      const photographerName = document.querySelector(".photograph-name");
+      photographerName.innerText = photographer.name;
     });
 }
 

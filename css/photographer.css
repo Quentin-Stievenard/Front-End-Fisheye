@@ -50,18 +50,23 @@
 }
 
 .modal header {
+  display: flex;
+  align-items: flex-start;
   justify-content: space-between;
   width: 100%;
 }
 
 .modal header img {
   cursor: pointer;
+  margin-top: 25px;
 }
 
 .modal header h2 {
   font-size: 64px;
   font-weight: normal;
   text-align: center;
+  margin-bottom: 0 !important;
+  margin-top: 0 !important;
 }
 
 form {
@@ -145,4 +150,32 @@ form input {
 
 .media-info p {
   font-size: 16px;
+}
+
+.prices-container {
+  background-color: #db8876;
+  width: 396px;
+  height: 89px;
+  border-radius: 5px;
+  position: fixed;
+  bottom: 0;
+  right: 36px;
+  text-align: right;
+  padding-top: 21px;
+  padding-right: 31px;
+}
+
+.prices-container p {
+  font-size: 24px;
+}
+
+.header-modal {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 90px;
+}
+
+.header-modal p {
+  margin: 0 !important;
+  font-size: 64px;
 }

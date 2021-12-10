@@ -8,13 +8,20 @@
       href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+      integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <title>Fisheye - photographe</title>
   </head>
   <body>
     <header>
       <a href="/"><img src="assets/images/logo.png" class="logo" /></a>
     </header>
-    <main id="main">
+    <main class="main-container" id="main">
       <div class="photograph-header">
         <div class="photograph-information"></div>
         <button class="contact_button" onclick="displayModal()">
@@ -37,8 +44,10 @@
     <div id="contact_modal">
       <div class="modal">
         <header>
-          <h2>Contactez-moi</h2>
-          <p class="photograph-name"></p>
+          <div class="header-modal">
+            <h2>Contactez-moi</h2>
+            <p class="photograph-name"></p>
+          </div>
           <img src="assets/icons/close.svg" onclick="closeModal()" />
         </header>
         <form>
