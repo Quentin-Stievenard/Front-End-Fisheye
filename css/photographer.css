@@ -74,6 +74,7 @@ form {
   width: 100%;
   flex-direction: column;
   align-items: flex-start;
+  margin-top: 75px;
 }
 
 form label {
@@ -124,13 +125,21 @@ form input {
 }
 
 .photograph-media h4 {
-  font-size: 24px;
+  font-size: 20px;
   color: #901c1c;
-  margin-top: 10px !important;
+  margin-top: 0px !important;
   margin-bottom: 0;
 }
 
 .photograph-media img {
+  width: 350px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.photograph-media video {
   width: 350px;
   height: 300px;
   object-fit: cover;
@@ -149,11 +158,22 @@ form input {
 }
 
 .media-info p {
-  font-size: 16px;
+  font-size: 24px;
+  color: #901c1c;
+}
+
+.media-info i {
+  margin-left: 10px;
+  cursor: pointer;
+  font-size: 24px;
+  color: #901c1c;
 }
 
 .prices-container {
   background-color: #db8876;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   width: 396px;
   height: 89px;
   border-radius: 5px;
@@ -161,21 +181,73 @@ form input {
   bottom: 0;
   right: 36px;
   text-align: right;
-  padding-top: 21px;
+  padding-top: 10px;
   padding-right: 31px;
+  padding-left: 31px;
 }
 
 .prices-container p {
   font-size: 24px;
+  width: fit-content;
+}
+
+.prices-container i {
+  margin-left: 10px;
 }
 
 .header-modal {
   display: flex;
   flex-direction: column;
-  margin-bottom: 90px;
+  align-items: flex-start;
 }
 
 .header-modal p {
   margin: 0 !important;
   font-size: 64px;
+}
+
+.lightbox_modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  background-color: white;
+  padding-top: 50px;
+}
+
+.lightbox_modal .close {
+  display: flex;
+  align-items: flex-end;
+  cursor: pointer;
+}
+
+.lightbox_modal .lightbox_container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.lightbox_modal .lightbox_container .lightbox_mid {
+  position: relative;
+}
+.lightbox_modal .lightbox_container .close {
+  position: absolute;
+  top: 0;
+  right: -50px;
+}
+
+.lightbox_modal .lightbox_container .lightbox_media {
+  width: 1050px;
+  height: 845px;
+  object-fit: cover;
+}
+
+.lightbox_modal p {
+  color: #901c1c;
+  font-size: 24px;
+  margin-left: 315px;
 }

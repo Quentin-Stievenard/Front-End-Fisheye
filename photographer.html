@@ -59,11 +59,26 @@
             <label>Email</label>
             <input />
             <label>Votre message</label>
-            <textarea rows="15" cols="100"></textarea>
+            <textarea rows="15" cols="88"></textarea>
           </div>
           <button class="contact_button">Envoyer</button>
         </form>
       </div>
+    </div>
+    <div id="lightbox_modal" class="lightbox_modal">
+      <div class="lightbox_container">
+        <img src="assets/icons/left.svg" />
+        <div class="lightbox_mid">
+          <img class="lightbox_media" />
+          <img
+            class="close"
+            src="assets/icons/close2.svg"
+            onclick="closeModal()"
+          />
+        </div>
+        <img src="assets/icons/right.svg" />
+      </div>
+      <p class="lightbox_label"></p>
     </div>
     <script src="scripts/factories/Photographer.js"></script>
     <script src="/scripts/utils/contactForm.js"></script>

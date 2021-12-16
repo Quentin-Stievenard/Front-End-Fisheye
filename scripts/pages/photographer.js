@@ -1,4 +1,7 @@
 //Mettre le code JavaScript lié à la page photographer.html
+
+let totalLikes = 0;
+
 async function getPhotographers() {
   const urlSearchId = window.location.search.split("=")[1];
   fetch("../../data/photographers.json")
@@ -14,8 +17,32 @@ async function getPhotographers() {
       const main = document.querySelector(".main-container");
       const prices = document.createElement("div");
       const price = document.createElement("p");
+      const likes = document.createElement("div");
+      const number = document.createElement("p");
+      const heart = document.createElement("i");
+
+      likes.style.display = "flex";
+      likes.style.alignItems = "center";
+
+      number.id = "totalLikes";
+      heart.className = "fa fa-heart";
+
+      const photographerMedia = data.media.filter(
+        (x) => x.photographerId == photographer.id
+      );
+
+      for (media of photographerMedia) {
+        totalLikes += media.likes;
+      }
+      // photographerMedia.forEach((media) => {
+      //   totalLikes += media.likes;
+      // });
+      number.innerText = totalLikes;
+      likes.appendChild(number);
+      likes.appendChild(heart);
       price.innerText = photographer.price + "/jour";
       prices.className = "prices-container";
+      prices.appendChild(likes);
       prices.appendChild(price);
       main.appendChild(prices);
 
@@ -61,6 +88,7 @@ async function displayMedias(medias) {
     photographersMedia.appendChild(userCardDOM);
   });
 }
+
 async function init() {
   getPhotographers();
   getMedias();

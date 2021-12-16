@@ -64,24 +64,61 @@ function photographerMedia(data) {
     const picture = `assets/photographers/media/${photographerName
       .split(" ")
       .join("_")}/${image ? image : video}`;
+
     const photographMedias = document.querySelector(".photograph-media");
     const media = document.createElement("div");
     const mediaInfo = document.createElement("div");
+    const lightbox = document.querySelector(".lightbox_modal");
+    const mediaLightbox = document.querySelector(".lightbox_media");
+    const labelLightbox = document.querySelector(".lightbox_label");
 
     mediaInfo.className = "media-info";
     media.className = "media-container";
 
-    const img = document.createElement("img");
-    img.setAttribute("src", picture);
+    console.log(data);
+
+    if (video == undefined) {
+      const img = document.createElement("img");
+      img.setAttribute("src", picture);
+      img.onclick = () => {
+        lightbox.style.display = "block";
+      };
+      media.appendChild(img);
+      mediaLightbox.setAttribute("src", picture);
+    } else {
+      const vid = document.createElement("video");
+      vid.setAttribute("src", picture);
+      vid.setAttribute("controls", true);
+      media.appendChild(vid);
+    }
+
+    let mediaLike = likes;
 
     const name = document.createElement("h4");
     name.textContent = title;
-    const like = document.createElement("p");
-    like.textContent = likes;
+    const like = document.createElement("div");
+    const number = document.createElement("p");
+
+    labelLightbox.innerText = title;
+
     const heart = document.createElement("i");
     heart.className = "fa fa-heart";
+    heart.addEventListener(
+      "click",
+      () => {
+        mediaLike += 1;
+        number.innerText = mediaLike;
+        increaseTotalLikes();
+      },
+      { once: true }
+    );
 
-    media.appendChild(img);
+    number.innerText = mediaLike;
+
+    like.style.display = "flex";
+    like.style.alignItems = "center";
+
+    like.appendChild(number);
     like.appendChild(heart);
 
     mediaInfo.appendChild(name);
@@ -98,4 +135,9 @@ function photographerMedia(data) {
     return article;
   }
   return { date, image, likes, price, title, getUserCardDOM };
+}
+
+function increaseTotalLikes() {
+  const likes = document.getElementById("totalLikes");
+  likes.innerText = Number(likes.innerHTML) + 1;
 }
