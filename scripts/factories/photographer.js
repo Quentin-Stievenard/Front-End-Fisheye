@@ -34,7 +34,6 @@ function photographerFactory(data) {
 
 function photographerDetails(data) {
   const { name, portrait, city, country, price, tagline } = data;
-  const urlSearchId = window.location.search.split("=")[1];
 
   const picture = `assets/photographers/${portrait}`;
 
@@ -74,8 +73,6 @@ function photographerMedia(data) {
 
     mediaInfo.className = "media-info";
     media.className = "media-container";
-
-    console.log(data);
 
     if (video == undefined) {
       const img = document.createElement("img");

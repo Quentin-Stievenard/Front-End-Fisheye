@@ -32,10 +32,10 @@
       <div class="photograph-container">
         <div class="photograph-filters">
           <p>Filtrer par</p>
-          <select>
-            <option>Popularité</option>
-            <option>Date</option>
-            <option>Titre</option>
+          <select id="filters">
+            <option value="popularity">Popularité</option>
+            <option value="date">Date</option>
+            <option value="title">Titre</option>
           </select>
         </div>
         <div class="photograph-media"></div>
@@ -52,16 +52,16 @@
         </header>
         <form>
           <div>
-            <label>Prénom</label>
-            <input />
-            <label>Nom</label>
-            <input />
-            <label>Email</label>
-            <input />
-            <label>Votre message</label>
-            <textarea rows="15" cols="88"></textarea>
+            <label for="prenom">Prénom</label>
+            <input id="prenom" />
+            <label for="nom">Nom</label>
+            <input id="nom" />
+            <label for="mail">Email</label>
+            <input id="mail" />
+            <label for="message">Votre message</label>
+            <textarea id="message" rows="15" cols="88"></textarea>
           </div>
-          <button class="contact_button">Envoyer</button>
+          <button onclick="onSubmit()" class="contact_button">Envoyer</button>
         </form>
       </div>
     </div>

@@ -62,14 +62,45 @@ async function getPhotographerName(id) {
   return reponse;
 }
 
-async function getMedias() {
+async function getMedias(filter = "popularity") {
   const urlSearchId = window.location.search.split("=")[1];
   fetch("../../data/photographers.json")
     .then((response) => response.json())
-    .then((data) =>
-      displayMedias(data.media.filter((x) => x.photographerId == urlSearchId))
-    );
+    .then((data) => {
+      const media = data.media.filter((x) => x.photographerId == urlSearchId);
+      let mediaSorted = [];
+      switch (filter) {
+        case "popularity":
+          mediaSorted = media.sort((a, b) => b.likes - a.likes);
+          break;
+        case "date":
+          mediaSorted = media.sort((a, b) => {
+            return new Date(a.date).valueOf() - new Date(b.date).valueOf();
+          });
+          console.log(mediaSorted);
+          break;
+        case "title":
+          mediaSorted = media.sort((a, b) => {
+            if (a.title.toLowerCase() < b.title.toLowerCase()) {
+              return -1;
+            } else if (a.title.toLowerCase() > b.title.toLowerCase()) {
+              return 1;
+            }
+          });
+      }
+      displayMedias(mediaSorted);
+    });
 }
+
+function filtersMedia() {
+  const filters = document.getElementById("filters");
+
+  filters.addEventListener("change", function () {
+    getMedias(filters.value);
+  });
+}
+
+filtersMedia();
 
 async function displayPhotographers(photographer) {
   const photographersSection = document.querySelector(
@@ -82,6 +113,7 @@ async function displayPhotographers(photographer) {
 
 async function displayMedias(medias) {
   const photographersMedia = document.querySelector(".photograph-media");
+  photographersMedia.innerHTML = "<div></div>";
   medias.forEach((media) => {
     const photographerModel = photographerMedia(media);
     const userCardDOM = photographerModel.getUserCardDOM();
