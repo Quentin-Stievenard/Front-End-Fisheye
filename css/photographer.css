@@ -33,7 +33,7 @@
 }
 
 .contact_button:hover {
-  background-color: #db8876;
+  background-color: white;
   color: black;
 }
 
@@ -129,6 +129,10 @@ form input {
   color: #901c1c;
   margin-top: 0px !important;
   margin-bottom: 0;
+  max-width: 200px;
+  overflow: hidden;
+  white-space: nowrap; /* Don't forget this one */
+  text-overflow: ellipsis;
 }
 
 .photograph-media img {
@@ -174,7 +178,7 @@ form input {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 396px;
+  width: 300px;
   height: 89px;
   border-radius: 5px;
   position: fixed;

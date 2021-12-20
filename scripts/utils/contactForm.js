@@ -16,5 +16,8 @@ function onSubmit() {
   const mail = document.getElementById("mail");
   const message = document.getElementById("message");
 
-  console.log(prenom.innerHTML);
+  console.log(prenom.value);
+  console.log(nom.value);
+  console.log(mail.value);
+  console.log(message.value);
 }

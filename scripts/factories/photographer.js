@@ -33,7 +33,7 @@ function photographerFactory(data) {
 }
 
 function photographerDetails(data) {
-  const { name, portrait, city, country, price, tagline } = data;
+  const { name, portrait, city, country, price, tagline } = data || {};
 
   const picture = `assets/photographers/${portrait}`;
 
@@ -74,14 +74,17 @@ function photographerMedia(data) {
     mediaInfo.className = "media-info";
     media.className = "media-container";
 
+    const lightboxSorted = [];
+
     if (video == undefined) {
       const img = document.createElement("img");
       img.setAttribute("src", picture);
       img.onclick = () => {
+        lightboxSorted = data.sort((a, b) => b.id - a.id);
+        mediaLightbox.setAttribute("src", lightboxSorted);
         lightbox.style.display = "block";
       };
       media.appendChild(img);
-      mediaLightbox.setAttribute("src", picture);
     } else {
       const vid = document.createElement("video");
       vid.setAttribute("src", picture);
@@ -138,3 +141,28 @@ function increaseTotalLikes() {
   const likes = document.getElementById("totalLikes");
   likes.innerText = Number(likes.innerHTML) + 1;
 }
+
+// const prenom = document.getElementById("prenom");
+// const nom = document.getElementById("nom");
+// const mail = document.getElementById("mail");
+// const message = document.getElementById("message");
+
+// // prenom.addEventListener("blur", () => {
+// //   console.log(prenom.value);
+// // });
+
+// nom.addEventListener("blur", () => {
+//   console.log(nom.value);
+// });
+
+// mail.addEventListener("blur", () => {
+//   console.log(mail.value);
+// });
+
+// message.addEventListener("blur", () => {
+//   console.log(message.value);
+// });
+
+// function onSubmit() {
+//   console.log(prenom.value);
+// }
