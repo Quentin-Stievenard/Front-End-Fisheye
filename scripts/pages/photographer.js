@@ -88,6 +88,7 @@ async function getMedias(filter = "popularity") {
             }
           });
       }
+
       displayMedias(mediaSorted);
     });
 }
