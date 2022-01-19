@@ -19,12 +19,18 @@
   </head>
   <body>
     <header>
-      <a href="/"><img src="assets/images/logo.png" class="logo" /></a>
+      <a href="index.html"
+        ><img src="assets/images/logo.png" class="logo" alt="Logo Fisheye"
+      /></a>
     </header>
     <main class="main-container" id="main">
       <div class="photograph-header">
         <div class="photograph-information"></div>
-        <button class="contact_button" onclick="displayModal()">
+        <button
+          class="contact_button"
+          aria-label="Contact me"
+          onclick="displayModal()"
+        >
           Contactez-moi
         </button>
         <img class="photograph-img" />
@@ -32,10 +38,18 @@
       <div class="photograph-container">
         <div class="photograph-filters">
           <p>Filtrer par</p>
-          <select id="filters">
-            <option value="popularity">Popularité</option>
-            <option value="date">Date</option>
-            <option value="title">Titre</option>
+          <select
+            aria-haspopup="true"
+            aria-expanded="false"
+            role="listbox"
+            aria-activedescendant="popularity"
+            id="filters"
+          >
+            <option tabindex="0" id="popularity" value="popularity">
+              Popularité
+            </option>
+            <option tabindex="0" id="date" value="date">Date</option>
+            <option tabindex="0" id="titre" value="title">Titre</option>
           </select>
         </div>
         <div class="photograph-media"></div>
@@ -45,38 +59,65 @@
       <div class="modal">
         <header>
           <div class="header-modal">
-            <h2>Contactez-moi</h2>
-            <p class="photograph-name"></p>
+            <h2 aria-label="Contact me">Contactez-moi</h2>
+            <p class="photograph-name" aria-label="Photographer name"></p>
           </div>
-          <img src="assets/icons/close.svg" onclick="closeModal()" />
+          <img
+            src="assets/icons/close.svg"
+            alt="close icon"
+            onclick="closeModal()"
+          />
         </header>
-        <form>
+        <form method="POST" id="form-contact">
           <div>
             <label for="prenom">Prénom</label>
-            <input id="prenom" />
+            <input type="text" name="prenom" placeholder="Jean" id="prenom" />
             <label for="nom">Nom</label>
-            <input id="nom" />
+            <input id="nom" type="text" name="nom" placeholder="Jacques" />
             <label for="mail">Email</label>
-            <input id="mail" />
+            <input
+              id="mail"
+              type="text"
+              name="mail"
+              placeholder="jj@gmail.com"
+            />
             <label for="message">Votre message</label>
-            <textarea id="message" rows="15" cols="88"></textarea>
+            <textarea
+              id="message"
+              rows="15"
+              cols="88"
+              type="text"
+              name="message"
+            ></textarea>
           </div>
-          <button onclick="onSubmit()" class="contact_button">Envoyer</button>
+          <button onclick="onSubmit()" class="contact_button" id="submit-form">
+            Envoyer
+          </button>
         </form>
       </div>
     </div>
     <div id="lightbox_modal" class="lightbox_modal">
       <div class="lightbox_container">
-        <img src="assets/icons/left.svg" />
+        <img
+          src="assets/icons/left.svg"
+          alt="left icon"
+          aria-label="Previous media"
+        />
         <div class="lightbox_mid">
           <img class="lightbox_media" />
           <img
+            aria-label="Close modal"
+            alt="close icon"
             class="close"
             src="assets/icons/close2.svg"
             onclick="closeModal()"
           />
         </div>
-        <img src="assets/icons/right.svg" />
+        <img
+          src="assets/icons/right.svg"
+          alt="right icon"
+          aria-label="Next media"
+        />
       </div>
       <p class="lightbox_label"></p>
     </div>
