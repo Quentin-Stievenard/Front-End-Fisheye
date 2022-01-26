@@ -1,6 +1,11 @@
 //Mettre le code JavaScript lié à la page photographer.html
 
 let totalLikes = 0;
+const mediaContainer = document.getElementById("media-container");
+const nextMediaIcon = document.getElementById("next-media");
+const previousMediaIcon = document.getElementById("previous-media");
+const lightbox = document.querySelector(".lightbox_modal");
+const contactModal = document.getElementById("contact_modal");
 
 async function getPhotographers() {
   const urlSearchId = window.location.search.split("=")[1];
@@ -31,6 +36,106 @@ async function getPhotographers() {
         (x) => x.photographerId == photographer.id
       );
 
+      function showNextMedia(current) {
+        let idx = photographerMedia.indexOf(current);
+        let nextMedia = photographerMedia[idx + 1];
+        if (nextMedia === undefined) {
+          nextMedia = photographerMedia[0];
+        }
+
+        if (nextMedia.image !== undefined) {
+          // it's an image
+          mediaContainer.innerHTML = `<img class="lightbox_media" src="assets/photographers/media/${nextMedia.image}">`;
+          localStorage.setItem(
+            "current-media",
+            nextMedia.image.split("/").slice(-1)[0]
+          );
+        } else {
+          mediaContainer.innerHTML = `<video class="lightbox_media" src="assets/photographers/media/${nextMedia.video}" controls></video>`;
+          localStorage.setItem(
+            "current-media",
+            nextMedia.video.split("/").slice(-1)[0]
+          );
+        }
+      }
+
+      nextMediaIcon.addEventListener("click", function (e) {
+        let currentMedia = localStorage.getItem("current-media");
+        let media = photographerMedia.find(
+          (media) => media.image == currentMedia
+        );
+        if (media !== undefined) {
+          // it's a photo
+          showNextMedia(media);
+        } else {
+          // it's a video
+          let media = photographerMedia.find(
+            (media) => media.video == currentMedia
+          );
+          showNextMedia(media);
+        }
+      });
+
+      function showPreviousMedia(current) {
+        let idx = photographerMedia.indexOf(current);
+        let previousMedia = photographerMedia[idx - 1];
+
+        if (previousMedia === undefined) {
+          previousMedia = photographerMedia[photographerMedia.length - 1];
+        }
+
+        if (previousMedia.image !== undefined) {
+          // it's an image
+          mediaContainer.innerHTML = `<img class="lightbox_media" src="assets/photographers/media/${previousMedia.image}">`;
+          localStorage.setItem(
+            "current-media",
+            previousMedia.image.split("/").slice(-1)[0]
+          );
+        } else {
+          mediaContainer.innerHTML = `<video class="lightbox_media" src="assets/photographers/media/${previousMedia.video}" controls></video>`;
+          localStorage.setItem(
+            "current-media",
+            previousMedia.video.split("/").slice(-1)[0]
+          );
+        }
+      }
+
+      previousMediaIcon.addEventListener("click", function (e) {
+        let currentMedia = localStorage.getItem("current-media");
+        let media = photographerMedia.find(
+          (media) => media.image == currentMedia
+        );
+        if (media !== undefined) {
+          // it's a photo
+          showPreviousMedia(media);
+        } else {
+          // it's a video
+          let media = photographerMedia.find(
+            (media) => media.video == currentMedia
+          );
+          showPreviousMedia(media);
+        }
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.code == "ArrowRight") {
+          if (lightbox.style.display == "block") {
+            showNextMedia(media);
+          }
+        } else if (event.code == "ArrowLeft") {
+          if (lightbox.style.display == "block") {
+            showPreviousMedia(media);
+          }
+        } else if (event.code == "Escape") {
+          if (lightbox.style.display == "block") {
+            closeModal();
+          }
+          if (contactModal.style.display == "block") {
+            closeModal();
+          }
+        }
+      });
+
       for (media of photographerMedia) {
         totalLikes += media.likes;
       }
@@ -57,7 +162,7 @@ async function getPhotographerName(id) {
     .then((response) => response.json())
     .then((data) => {
       const photographer = data.photographers.find((x) => x.id == id);
-      reponse = photographer?.name;
+      reponse = photographer.name;
     });
   return reponse;
 }
@@ -77,7 +182,6 @@ async function getMedias(filter = "popularity") {
           mediaSorted = media.sort((a, b) => {
             return new Date(a.date).valueOf() - new Date(b.date).valueOf();
           });
-          console.log(mediaSorted);
           break;
         case "title":
           mediaSorted = media.sort((a, b) => {

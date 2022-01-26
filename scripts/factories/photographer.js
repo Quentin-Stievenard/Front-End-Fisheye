@@ -60,14 +60,13 @@ function photographerDetails(data) {
 function photographerMedia(data) {
   const { date, image, likes, price, title, video } = data;
   getPhotographerName(data.photographerId).then((photographerName) => {
-    const picture = `assets/photographers/media/${photographerName
-      .split(" ")
-      .join("_")}/${image ? image : video}`;
+    const picture = `assets/photographers/media/${image ? image : video}`;
 
     const photographMedias = document.querySelector(".photograph-media");
     const media = document.createElement("div");
     const mediaInfo = document.createElement("div");
     const lightbox = document.querySelector(".lightbox_modal");
+    const mediaContainer = document.getElementById("media-container");
     const mediaLightbox = document.querySelector(".lightbox_media");
     const labelLightbox = document.querySelector(".lightbox_label");
 
@@ -79,14 +78,20 @@ function photographerMedia(data) {
       img.setAttribute("src", picture);
       img.setAttribute("alt", title);
       img.onclick = () => {
-        mediaLightbox.setAttribute("src", lightboxSorted);
         lightbox.style.display = "block";
+        mediaContainer.innerHTML = `<img class="lightbox_media" src="${picture}">`;
+        localStorage.setItem("current-media", picture.split("/").slice(-1)[0]);
       };
       media.appendChild(img);
     } else {
       const vid = document.createElement("video");
       vid.setAttribute("src", picture);
       vid.setAttribute("controls", true);
+      vid.onclick = () => {
+        lightbox.style.display = "block";
+        mediaContainer.innerHTML = `<video src="${picture}" controls></video>`;
+        localStorage.setItem("current-media", picture.split("/").slice(-1)[0]);
+      };
       media.appendChild(vid);
     }
 

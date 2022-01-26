@@ -17,6 +17,7 @@
     />
     <title>Fisheye - photographe</title>
   </head>
+
   <body>
     <header>
       <a href="index.html"
@@ -71,11 +72,24 @@
         <form method="POST" id="form-contact">
           <div>
             <label for="prenom">Prénom</label>
-            <input type="text" name="prenom" placeholder="Jean" id="prenom" />
+            <input
+              tabindex="+1"
+              type="text"
+              name="prenom"
+              placeholder="Jean"
+              id="prenom"
+            />
             <label for="nom">Nom</label>
-            <input id="nom" type="text" name="nom" placeholder="Jacques" />
+            <input
+              tabindex="+1"
+              id="nom"
+              type="text"
+              name="nom"
+              placeholder="Jacques"
+            />
             <label for="mail">Email</label>
             <input
+              tabindex="+1"
               id="mail"
               type="text"
               name="mail"
@@ -83,6 +97,7 @@
             />
             <label for="message">Votre message</label>
             <textarea
+              tabindex="+1"
               id="message"
               rows="15"
               cols="88"
@@ -102,9 +117,10 @@
           src="assets/icons/left.svg"
           alt="left icon"
           aria-label="Previous media"
+          id="previous-media"
         />
         <div class="lightbox_mid">
-          <img class="lightbox_media" />
+          <div tabindex="0" id="media-container"></div>
           <img
             aria-label="Close modal"
             alt="close icon"
@@ -117,6 +133,7 @@
           src="assets/icons/right.svg"
           alt="right icon"
           aria-label="Next media"
+          id="next-media"
         />
       </div>
       <p class="lightbox_label"></p>
