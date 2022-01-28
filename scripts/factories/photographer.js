@@ -73,27 +73,7 @@ function photographerMedia(data) {
     mediaInfo.className = "media-info";
     media.className = "media-container";
 
-    if (video == undefined) {
-      const img = document.createElement("img");
-      img.setAttribute("src", picture);
-      img.setAttribute("alt", title);
-      img.onclick = () => {
-        lightbox.style.display = "block";
-        mediaContainer.innerHTML = `<img class="lightbox_media" src="${picture}">`;
-        localStorage.setItem("current-media", picture.split("/").slice(-1)[0]);
-      };
-      media.appendChild(img);
-    } else {
-      const vid = document.createElement("video");
-      vid.setAttribute("src", picture);
-      vid.setAttribute("controls", true);
-      vid.onclick = () => {
-        lightbox.style.display = "block";
-        mediaContainer.innerHTML = `<video src="${picture}" controls></video>`;
-        localStorage.setItem("current-media", picture.split("/").slice(-1)[0]);
-      };
-      media.appendChild(vid);
-    }
+    MediaFactory.render(data, picture, title, media);
 
     let mediaLike = likes;
 

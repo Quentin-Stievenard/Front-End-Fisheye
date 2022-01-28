@@ -120,11 +120,37 @@ async function getPhotographers() {
       document.addEventListener("keydown", (event) => {
         if (event.code == "ArrowRight") {
           if (lightbox.style.display == "block") {
-            showNextMedia(media);
+            let currentMedia = localStorage.getItem("current-media");
+            let media = photographerMedia.find(
+              (media) => media.image == currentMedia
+            );
+            if (media !== undefined) {
+              // it's a photo
+              showNextMedia(media);
+            } else {
+              // it's a video
+              let media = photographerMedia.find(
+                (media) => media.video == currentMedia
+              );
+              showNextMedia(media);
+            }
           }
         } else if (event.code == "ArrowLeft") {
           if (lightbox.style.display == "block") {
-            showPreviousMedia(media);
+            let currentMedia = localStorage.getItem("current-media");
+            let media = photographerMedia.find(
+              (media) => media.image == currentMedia
+            );
+            if (media !== undefined) {
+              // it's a photo
+              showPreviousMedia(media);
+            } else {
+              // it's a video
+              let media = photographerMedia.find(
+                (media) => media.video == currentMedia
+              );
+              showPreviousMedia(media);
+            }
           }
         } else if (event.code == "Escape") {
           if (lightbox.style.display == "block") {
