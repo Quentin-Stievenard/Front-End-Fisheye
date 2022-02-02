@@ -3,9 +3,12 @@ class ImageFactory {
     const img = document.createElement("img");
     img.setAttribute("src", picture);
     img.setAttribute("alt", title);
+    img.setAttribute("aria-label", title);
+
     img.onclick = () => {
       lightbox.style.display = "block";
       mediaContainer.innerHTML = `<img class="lightbox_media" src="${picture}">`;
+      labelLightbox.innerHTML = `<p>${title}</p>`;
       localStorage.setItem("current-media", picture.split("/").slice(-1)[0]);
     };
     media.appendChild(img);

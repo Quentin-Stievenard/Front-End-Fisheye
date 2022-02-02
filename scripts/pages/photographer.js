@@ -6,6 +6,7 @@ const nextMediaIcon = document.getElementById("next-media");
 const previousMediaIcon = document.getElementById("previous-media");
 const lightbox = document.querySelector(".lightbox_modal");
 const contactModal = document.getElementById("contact_modal");
+const labelLightbox = document.querySelector(".lightbox_label");
 
 async function getPhotographers() {
   const urlSearchId = window.location.search.split("=")[1];
@@ -19,6 +20,7 @@ async function getPhotographers() {
         "src",
         `assets/photographers/${photographer.portrait}`
       );
+      avatar.setAttribute("tabindex", 0);
       const main = document.querySelector(".main-container");
       const prices = document.createElement("div");
       const price = document.createElement("p");
@@ -50,12 +52,14 @@ async function getPhotographers() {
             "current-media",
             nextMedia.image.split("/").slice(-1)[0]
           );
+          labelLightbox.innerHTML = `<p>${nextMedia.title}</p>`;
         } else {
           mediaContainer.innerHTML = `<video class="lightbox_media" src="assets/photographers/media/${nextMedia.video}" controls></video>`;
           localStorage.setItem(
             "current-media",
             nextMedia.video.split("/").slice(-1)[0]
           );
+          labelLightbox.innerHTML = `<p>${nextMedia.title}</p>`;
         }
       }
 
@@ -91,12 +95,14 @@ async function getPhotographers() {
             "current-media",
             previousMedia.image.split("/").slice(-1)[0]
           );
+          labelLightbox.innerHTML = `<p>${previousMedia.title}</p>`;
         } else {
           mediaContainer.innerHTML = `<video class="lightbox_media" src="assets/photographers/media/${previousMedia.video}" controls></video>`;
           localStorage.setItem(
             "current-media",
             previousMedia.video.split("/").slice(-1)[0]
           );
+          labelLightbox.innerHTML = `<p>${previousMedia.title}</p>`;
         }
       }
 
@@ -173,6 +179,8 @@ async function getPhotographers() {
       likes.appendChild(heart);
       price.innerText = photographer.price + "/jour";
       prices.className = "prices-container";
+      price.tabIndex = 0;
+      price.ariaLabel = photographer.price;
       prices.appendChild(likes);
       prices.appendChild(price);
       main.appendChild(prices);

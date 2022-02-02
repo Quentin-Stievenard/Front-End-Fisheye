@@ -20,7 +20,7 @@
 
   <body>
     <header>
-      <a href="index.html"
+      <a tabindex="0  " href="index.html"
         ><img src="assets/images/logo.png" class="logo" alt="Logo Fisheye"
       /></a>
     </header>
@@ -29,7 +29,7 @@
         <div class="photograph-information"></div>
         <button
           class="contact_button"
-          aria-label="Contact me"
+          aria-label="Contactez moi"
           onclick="displayModal()"
         >
           Contactez-moi
@@ -60,7 +60,7 @@
       <div class="modal">
         <header>
           <div class="header-modal">
-            <h2 aria-label="Contact me">Contactez-moi</h2>
+            <h2 aria-label="Contactez moi">Contactez-moi</h2>
             <p class="photograph-name" aria-label="Photographer name"></p>
           </div>
           <img
@@ -136,7 +136,7 @@
           id="next-media"
         />
       </div>
-      <p class="lightbox_label"></p>
+      <div class="lightbox_label"></div>
     </div>
     <script src="scripts/factories/photographer.js"></script>
     <script src="scripts/factories/media.js"></script>

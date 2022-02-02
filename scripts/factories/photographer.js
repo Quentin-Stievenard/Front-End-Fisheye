@@ -8,6 +8,14 @@ function photographerFactory(data) {
     article.onclick = function () {
       return (window.location.href = `http://127.0.0.1:5500/photographer.html?id=${data.id}`);
     };
+    article.setAttribute("tabindex", 1);
+    article.addEventListener("keyup", function (event) {
+      if (event.keyCode === 13) {
+        event.preventDefault();
+        window.location.href = `http://127.0.0.1:5500/photographer.html?id=${data.id}`;
+      }
+    });
+
     const img = document.createElement("img");
     img.setAttribute("src", picture);
     const h2 = document.createElement("h2");
@@ -41,12 +49,18 @@ function photographerDetails(data) {
     const article = document.createElement("article");
     const h2 = document.createElement("h2");
     h2.textContent = name;
+    h2.setAttribute("tabindex", 0);
+    h2.setAttribute("aria-label", name);
     const location = document.createElement("p");
     location.textContent = city + ", " + country;
     location.className = "location";
+    location.setAttribute("tabindex", 0);
+    location.setAttribute("aria-label", city + ", " + country);
     const slogan = document.createElement("p");
     slogan.textContent = tagline;
     slogan.className = "slogan";
+    slogan.setAttribute("tabindex", 0);
+    slogan.setAttribute("aria-label", tagline);
 
     article.appendChild(h2);
     article.appendChild(location);
@@ -68,7 +82,17 @@ function photographerMedia(data) {
     const lightbox = document.querySelector(".lightbox_modal");
     const mediaContainer = document.getElementById("media-container");
     const mediaLightbox = document.querySelector(".lightbox_media");
-    const labelLightbox = document.querySelector(".lightbox_label");
+
+    media.tabIndex = 0;
+    media.addEventListener("keyup", function (event) {
+      if (event.keyCode === 13) {
+        event.preventDefault();
+        lightbox.style.display = "block";
+        mediaContainer.innerHTML = `<img class="lightbox_media" src="${picture}">`;
+        labelLightbox.innerHTML = `<p>${title}</p>`;
+        localStorage.setItem("current-media", picture.split("/").slice(-1)[0]);
+      }
+    });
 
     mediaInfo.className = "media-info";
     media.className = "media-container";
@@ -82,10 +106,17 @@ function photographerMedia(data) {
     const like = document.createElement("div");
     const number = document.createElement("p");
 
-    labelLightbox.innerText = title;
-
     const heart = document.createElement("i");
     heart.className = "fa fa-heart";
+    heart.tabIndex = 0;
+    heart.addEventListener("keyup", function (event) {
+      if (event.keyCode === 13) {
+        event.stopPropagation();
+        mediaLike += 1;
+        number.innerText = mediaLike;
+        increaseTotalLikes();
+      }
+    });
     heart.addEventListener(
       "click",
       () => {
