@@ -21,6 +21,7 @@ async function getPhotographers() {
         `assets/photographers/${photographer.portrait}`
       );
       avatar.setAttribute("tabindex", 0);
+      avatar.ariaLabel = photographer.name;
       const main = document.querySelector(".main-container");
       const prices = document.createElement("div");
       const price = document.createElement("p");
@@ -175,14 +176,15 @@ async function getPhotographers() {
       //   totalLikes += media.likes;
       // });
       number.innerText = totalLikes;
-      likes.appendChild(number);
-      likes.appendChild(heart);
+      likes.append(number, heart);
+      setAttributes(price, {
+        tabIndex: 0,
+        ariaLabel: photographer.price,
+      });
       price.innerText = photographer.price + "/jour";
       prices.className = "prices-container";
-      price.tabIndex = 0;
-      price.ariaLabel = photographer.price;
-      prices.appendChild(likes);
-      prices.appendChild(price);
+
+      prices.append(likes, price);
       main.appendChild(prices);
 
       const photographerName = document.querySelector(".photograph-name");

@@ -124,7 +124,7 @@ form input {
   margin-top: 58px;
 }
 
-.photograph-media h4 {
+.photograph-media h1 {
   font-size: 20px;
   color: #901c1c;
   margin-top: 0px !important;
@@ -161,7 +161,7 @@ form input {
   justify-content: space-between;
 }
 
-.media-info p {
+.media-info h2 {
   font-size: 24px;
   color: #901c1c;
 }

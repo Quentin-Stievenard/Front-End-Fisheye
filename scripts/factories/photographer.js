@@ -5,6 +5,12 @@ function photographerFactory(data) {
 
   function getUserCardDOM() {
     const article = document.createElement("article");
+    const img = document.createElement("img");
+    const h2 = document.createElement("h2");
+    const location = document.createElement("p");
+    const slogan = document.createElement("p");
+    const prices = document.createElement("p");
+
     article.onclick = function () {
       return (window.location.href = `http://127.0.0.1:5500/photographer.html?id=${data.id}`);
     };
@@ -16,25 +22,16 @@ function photographerFactory(data) {
       }
     });
 
-    const img = document.createElement("img");
-    img.setAttribute("src", picture);
-    const h2 = document.createElement("h2");
+    setAttributes(img, { src: picture, "aria-label": name });
     h2.textContent = name;
-    const location = document.createElement("p");
     location.textContent = city + ", " + country;
     location.className = "location";
-    const slogan = document.createElement("p");
     slogan.textContent = tagline;
     slogan.className = "slogan";
-    const prices = document.createElement("p");
     prices.textContent = price + "/jour";
     prices.className = "prices";
 
-    article.appendChild(img);
-    article.appendChild(h2);
-    article.appendChild(location);
-    article.appendChild(slogan);
-    article.appendChild(prices);
+    article.append(img, h2, location, slogan, prices);
     return article;
   }
   return { name, picture, city, country, price, tagline, getUserCardDOM };
@@ -48,23 +45,24 @@ function photographerDetails(data) {
   function getUserCardDOM() {
     const article = document.createElement("article");
     const h2 = document.createElement("h2");
-    h2.textContent = name;
-    h2.setAttribute("tabindex", 0);
-    h2.setAttribute("aria-label", name);
     const location = document.createElement("p");
-    location.textContent = city + ", " + country;
-    location.className = "location";
-    location.setAttribute("tabindex", 0);
-    location.setAttribute("aria-label", city + ", " + country);
     const slogan = document.createElement("p");
-    slogan.textContent = tagline;
-    slogan.className = "slogan";
-    slogan.setAttribute("tabindex", 0);
-    slogan.setAttribute("aria-label", tagline);
 
-    article.appendChild(h2);
-    article.appendChild(location);
-    article.appendChild(slogan);
+    h2.textContent = name;
+    setAttributes(h2, { tabIndex: 0, "aria-label": name });
+    location.textContent = city + ", " + country;
+    setAttributes(location, {
+      className: "location",
+      tabIndex: 0,
+      ariaLabel: `${city}, ${country}`,
+    });
+    slogan.textContent = tagline;
+    setAttributes(slogan, {
+      className: "slogan",
+      tabIndex: 0,
+      ariaLabel: tagline,
+    });
+    article.append(h2, location, slogan);
 
     return article;
   }
@@ -101,13 +99,14 @@ function photographerMedia(data) {
 
     let mediaLike = likes;
 
-    const name = document.createElement("h4");
-    name.textContent = title;
+    const name = document.createElement("h1");
     const like = document.createElement("div");
-    const number = document.createElement("p");
-
+    const number = document.createElement("h2");
     const heart = document.createElement("i");
     heart.className = "fa fa-heart";
+
+    name.textContent = title;
+
     heart.tabIndex = 0;
     heart.addEventListener("keyup", function (event) {
       if (event.keyCode === 13) {
@@ -132,11 +131,8 @@ function photographerMedia(data) {
     like.style.display = "flex";
     like.style.alignItems = "center";
 
-    like.appendChild(number);
-    like.appendChild(heart);
-
-    mediaInfo.appendChild(name);
-    mediaInfo.appendChild(like);
+    like.append(number, heart);
+    mediaInfo.append(name, like);
 
     media.appendChild(mediaInfo);
 
